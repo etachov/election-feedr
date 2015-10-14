@@ -1,7 +1,7 @@
 
 library(dplyr) # general data manipulation
-library(XML) # to parse the xml feed
-library(countrycode) # convert country names to country codes. working with country names always gets messy so i like to convert to codes ASAP
+library(XML) # parse the xml feed
+library(countrycode) # convert country names to country codes. working with country names always gets messy so i like to convert to codes ASAP.
 
 ## parse the raw xml from IFES's Election Guide RSS feed into the R data type XMLInternalDocument
 feed_raw <- xmlParse("http://www.electionguide.org/feed/calendar/upcoming", encoding = "UTF-8")
@@ -9,7 +9,7 @@ feed_raw <- xmlParse("http://www.electionguide.org/feed/calendar/upcoming", enco
 ## make a list of the nodes we want to pull out
 node_list <- as.list(c("//item/title", "//item/link", "//item/description", "//item/pubDate"))
 
-## helper function that usings xpathSApply to extact the value from each node using xmlValue
+## helper function using xpathSApply to extact the value from each node using xmlValue
 nodeGet <- function(x) {
   x <- xpathSApply(feed_raw, x, xmlValue)
   x
@@ -36,6 +36,7 @@ data <- data_raw %>%
          date = as.Date(pubDate, format = "%a, %d %b %Y")) %>%
   select(country, iso3c, elect.type, date, description, link) %>%
   # filter down to only the country we care about
+  # if you want all upcoming elections cut this line out
   filter(iso3c %in% country_filter)
 
 ## write the data out to csv file with the date accessed in the title
