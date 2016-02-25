@@ -4,7 +4,5 @@ This script (1) pulls elections from <a href = "http://www.electionguide.org/" t
 
 I use this script to keep tabs on elections in countries where <a href = "http://www.mdif.org" target = "_blank">MDIF</a> has investments. When an election takes place, we like to evaluate how our client's coverage compares with other media sources in the country. We visualize the results in our <a href = "http://www.mdif.org/client-election-coverage/">Election StoryMap</a>. 
 
-## Next Steps: 
-* Replace the .csv write out with code that updates a Google Sheet using the great <a href = "https://github.com/jennybc/googlesheets" target = "_blank">googlesheets</a> package.
-* Refactor the whole nodeGet section. 
+
 
