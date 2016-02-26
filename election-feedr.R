@@ -19,11 +19,11 @@ nodeGet <- function(x) {
 elect_raw <- as.data.frame(lapply(node_list, nodeGet)) 
 
 ## set the names using the original list
-names(data_raw) <- gsub("//item/", "", node_list)
+names(elect_raw) <- gsub("//item/", "", node_list)
 
 
 ## clean up the data with some regex and dplyr
-elect <- data_raw %>%
+elect <- elect_raw %>%
   mutate(country = gsub(":.*", "", title),
          iso3c = countrycode(country, "country.name", "iso3c"),
          elect.type = gsub(".*:", "", title),
@@ -35,7 +35,7 @@ elect <- data_raw %>%
 
 
 ## subset the list by a vector of countries if you have a specific focus: 
-countries_interest <- countrycode(c("Iran", "United Kingdom"), "country.name", "iso3c")
+countries_interest <- countrycode(c("Zambia", "United Kingdom"), "country.name", "iso3c")
 
 elect %>%
   filter(iso3c %in% countries_interest)
