@@ -1,7 +1,7 @@
 
 library(dplyr) # general data manipulation
 library(XML) # parse the xml feed
-library(countrycode) # convert country names to country codes. working with country names always gets messy so i like to convert to codes ASAP.
+library(countrycode) # working with country names always gets messy so i like to convert to codes ASAP.
 
 ## parse the raw xml from IFES's Election Guide RSS feed into the R data type XMLInternalDocument
 feed_raw <- xmlParse("http://www.electionguide.org/feed/calendar/upcoming", encoding = "UTF-8")
@@ -21,7 +21,6 @@ elect_raw <- as.data.frame(lapply(node_list, nodeGet))
 ## set the names using the original list
 names(elect_raw) <- gsub("//item/", "", node_list)
 
-
 ## clean up the data with some regex and dplyr
 elect <- elect_raw %>%
   mutate(country = gsub(":.*", "", title),
@@ -35,7 +34,7 @@ elect <- elect_raw %>%
 
 
 ## subset the list by a vector of countries if you have a specific focus: 
-countries_interest <- countrycode(c("Zambia", "United Kingdom"), "country.name", "iso3c")
+countries_interest <- countrycode(c("Comoros", "Zambia", "United Kingdom"), "country.name", "iso3c")
 
 elect %>%
   filter(iso3c %in% countries_interest)
